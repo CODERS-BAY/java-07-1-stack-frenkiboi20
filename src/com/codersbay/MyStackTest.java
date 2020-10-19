@@ -37,7 +37,7 @@ public class MyStackTest {
     }
 
     @Test
-    public void testPopWithSpecificIndex() {
+    public void testPopWithSpecificIndex() throws StackTooSmallException {
 
         MyStack myStack = new MyStack();
 
@@ -45,10 +45,15 @@ public class MyStackTest {
         myStack.push(20);
         myStack.push(30);
         myStack.push(40);
+        assertEquals(myStack.pop(), 40);
 
-        int pop = myStack.myStacks.get(1);
-        assertEquals(pop, 20);
-
+        myStack.push(50);
+        myStack.push(60);
+        myStack.push(70);
+        int[] nums = myStack.pop(3);
+        assertEquals(nums[0], 50);
+        assertEquals(nums[1], 60);
+        assertEquals(nums[2], 70);
     }
 
     @Test
@@ -62,5 +67,5 @@ public class MyStackTest {
             myStack.pop(1);
         });
     }
-    
+
 }

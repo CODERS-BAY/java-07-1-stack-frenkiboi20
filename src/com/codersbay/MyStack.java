@@ -19,24 +19,12 @@ public class MyStack {
     }
 
     public int pop() throws StackTooSmallException {
-        int lastElement = 0;
-        if (myStacks.isEmpty()) throw new StackTooSmallException();
-        else if (myStacks.size() > 0) return myStacks.get(myStacks.size()-1);
-        return lastElement;
-        /*
-        int lastElement = 0;
         if (myStacks.isEmpty()) {
             throw new StackTooSmallException();
         } else {
-            if (myStacks.size() > 0) {
-                lastElement = myStacks.size();
-                myStacks.remove(myStacks.size() - 1);
-                return lastElement;
-            }
+            return myStacks.remove(myStacks.size()-1);
         }
-        return lastElement;
 
-         */
     }
 
     public int peek() throws StackTooSmallException {
@@ -48,16 +36,14 @@ public class MyStack {
     }
 
     public int[] pop(int n) throws StackTooSmallException {
-        if (myStacks.size() > 0) {
-            for (int i = 0; i < n; i++) {
-                myStacks.remove(myStacks.size() - 1 - i);
-            }
-            int[] nums = new int[myStacks.size()];
-            for (int i = 0; i < myStacks.size(); i++) {
-                nums[i] = myStacks.get(i);
-            }
-            return nums;
-        } else throw new StackTooSmallException();
+        if (n > myStacks.size()) {
+            throw new StackTooSmallException();
+        }
+        int[] nums = new int[n];
+        for (int i = n - 1; i >= 0; i--) {
+            nums[i] = myStacks.remove(myStacks.size() - 1);
+        }
+        return nums;
     }
 
 }
